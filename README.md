@@ -1,0 +1,1 @@
+A PyTorch implementation of acoustic word embeddings using gated CNN
