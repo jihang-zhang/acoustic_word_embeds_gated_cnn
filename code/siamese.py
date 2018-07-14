@@ -148,7 +148,7 @@ if __name__ == "__main__":
         print('Exiting from training early')
 
     print("==> Loading best model..")
-    best_model = torch.load(SAVE_PATH + "/best")
+    best_model = torch.load(os.path.join(SAVE_PATH, "best"))
 
     best_model.eval()
 
