@@ -16,7 +16,7 @@ from model import GatedCNN, Siamese
 # Configurations
 seed = 37
 log_interval = 50
-MAX_EPOCHS = 40
+MAX_EPOCHS = 1000
 min_count = 3
 batch_size = 32
 SAVE_PATH = "../check_points_Siamese"
