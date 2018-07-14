@@ -11,7 +11,7 @@ This is a PyTorch implementation of acoustic word embeddings using gated convolu
 Instead of ReLU activation function after each convolution/fully-connected layer, the following gated tanh unit (GTU) is used:
 
 <p align="center">
-    <img src = "./figures/diagram.png" width="90%">
+    <img src = "./figures/diagram.png" width="70%">
 </p>
 
 GTU is initially proposed by [Oord et al., 2016](http://papers.nips.cc/paper/6527-conditional-image-generation-with-pixelcnn-decoders) and thoroughly discussed by [Dauphin et al., 2016](https://arxiv.org/abs/1612.08083)
@@ -25,7 +25,7 @@ The model trains supervised neural networks to classify each speech segment. The
 The model trains with a triplet margin loss:
 
 <p align="center">
-    <img src = "./figures/formula.png" width="70">
+    <img src = "./figures/formula.png" width="70%">
 </p>
 
 The output from the final linear layer can be seen as a representation of spoken words in 1024-dimensional real space as default.
@@ -110,12 +110,12 @@ Use t-SNE to visualize the embeddings.
 #### classifier gated CNN:
 
 <p align="center">
-    <img src = "./figures/tsne_classifier.png" width="90%">
+    <img src = "./figures/tsne_classifier.png" width="80%">
 </p>
 
 #### Siamese gated CNN:
 
 <p align="center">
-    <img src = "./figures/tsne_siamese.png" width="90%">
+    <img src = "./figures/tsne_siamese.png" width="80%">
 </p>
 
