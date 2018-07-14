@@ -57,6 +57,10 @@ data/
 
 - directory of datasets
 
+figure/
+
+- figures used in README.md
+
 ## Usage
 
 1. Install all dependencies (above)
