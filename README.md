@@ -25,7 +25,7 @@ The model trains supervised neural networks to classify each speech segment. The
 The model trains with a triplet margin loss:
 
 <p align="center">
-    <img src = "./figures/formula.png" width="50%">
+    <img src = "./figures/formula2.png" width="50%">
 </p>
 
 The output from the final linear layer can be seen as a representation of spoken words in 1024-dimensional real space as default.
