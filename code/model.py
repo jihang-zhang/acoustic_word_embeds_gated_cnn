@@ -3,15 +3,10 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class BasicBlock(nn.Module):
-    def __init__(self, in_channels, out_channels, kernel_size, stride=1, padding=0, pooling=True, initialization=True):
+    def __init__(self, in_channels, out_channels, kernel_size, stride=1, padding=0, initialization=True):
         super(BasicBlock, self).__init__()
         self.initialization = initialization
-        self.pooling = pooling
-
         self.conv = nn.Conv1d(in_channels, out_channels, kernel_size, stride, padding)
-
-        if pooling:
-            self.pool = nn.MaxPool1d(3)
 
         if initialization:
             self.init_weights()
@@ -20,20 +15,17 @@ class BasicBlock(nn.Module):
         nn.init.kaiming_uniform_(self.conv.weight)
 
     def forward(self, x):
-        out = self.conv(x)
-        if self.pooling:
-            out = self.pool(out)
-        return out
+        return self.conv(x)
 
 class GatingBlock(nn.Module):
-    def __init__(self, in_channels, out_channels, kernel_size, stride=1, padding=0, pooling=True, initialization=True, activation=None):
+    def __init__(self, in_channels, out_channels, kernel_size, stride=1, padding=0, initialization=True, activation=None):
         super(GatingBlock, self).__init__()
 
         self.activation = activation
 
-        self.block1 = BasicBlock(in_channels, out_channels, kernel_size, stride, padding, pooling, initialization)
+        self.block1 = BasicBlock(in_channels, out_channels, kernel_size, stride, padding, initialization)
         self.bn1 = nn.BatchNorm1d(out_channels)
-        self.block2 = BasicBlock(in_channels, out_channels, kernel_size, stride, padding, pooling, initialization)
+        self.block2 = BasicBlock(in_channels, out_channels, kernel_size, stride, padding, initialization)
         self.bn2 = nn.BatchNorm1d(out_channels)
 
     def forward(self, x):
@@ -72,12 +64,13 @@ class GatedCNN(nn.Module):
         self.activation = activation
 
         self.gb1 = GatingBlock(39, 512, 9, initialization=initialization, activation=activation)
+        self.pool1 = nn.MaxPool1d(3)
 
-        self.bottleneck = nn.Sequential(GatingBlock(512, 128, 3, padding=1, pooling=False, initialization=False, activation=activation),
-                                        GatingBlock(128, 128, 9, padding=4, pooling=False, initialization=False, activation=activation),
-                                        GatingBlock(128, 512, 3, padding=1, pooling=False, initialization=False, activation=activation))
+        self.bottleneck = nn.Sequential(GatingBlock(512, 128, 3, padding=1, initialization=False, activation=activation),
+                                        GatingBlock(128, 128, 9, padding=4, initialization=False, activation=activation),
+                                        GatingBlock(128, 512, 3, padding=1, initialization=False, activation=activation))
 
-        self.pool = nn.MaxPool1d(16)
+        self.pool2 = nn.MaxPool1d(16)
         self.lgb = LinearGatingBlock(2048, 1024, activation=activation)
         self.fc = nn.Linear(1024, out_dims)
         self.softmax = torch.nn.Softmax(dim=1)
@@ -91,8 +84,9 @@ class GatedCNN(nn.Module):
 
     def forward(self, x):
         out = self.gb1(x)
+        out = self.pool1(out)
         out = self.bottleneck(out)
-        out = self.pool(out)
+        out = self.pool2(out)
         out = out.view(-1, 2048)
         out = self.lgb(out)
         out = self.fc(out)
