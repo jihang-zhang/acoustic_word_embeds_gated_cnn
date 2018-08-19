@@ -142,3 +142,9 @@ Use t-SNE to visualize the embeddings.
 - A. van den Oord, N. Kalchbrenner, L. Espeholt, O. Vinyals, A. Graves et al., “Conditional image generation with pixelcnn decoders,” in Advances in Neural Information Processing Systems, 2016.
 - Y. N. Dauphin, A. Fan, M. Auli, and D. Grangier, “Language modeling with gated convolutional networks,” 2016.
 
+# TODO list
+1. Fine tuning.
+2. Optimize data preprocessing for the cross-modal network.
+3. Consider combination of triplet losses for the cross-modal network.
+4. Implement fast softmax computation (e.g. Adaptive Softmax, Hierarchical Softmax).
+5. Evaluate models by a more practical discriminate task.
