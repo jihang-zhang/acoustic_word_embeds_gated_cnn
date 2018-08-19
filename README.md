@@ -115,7 +115,7 @@ figure/
 | Multi-view LSTM [He +, 2017](https://arxiv.org/abs/1611.04496) |   1024    |       0.806       |
 | Classifier Gated CNN (my model)                              |   1061    |     **0.853**     |
 | Siamese Gated CNN (my model)                                 |   1024    |     **0.756**     |
-| Gated deep residual network (my model)                       |   1061    |     **0.741**     |
+| Gated deep residual network (my model)                       |   1061    |     **0.841**     |
 | CNN + BiLSTM Cross-modal network (my model)                  |   1024    |     **TBD**     |
 
 Our acoustic word embeddings using classifier gated CNN improves over previous approaches for the task of word discrimination.
