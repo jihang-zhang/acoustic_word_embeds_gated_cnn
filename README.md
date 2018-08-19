@@ -92,6 +92,17 @@ figure/
    ```bash
    $ python siamese.py
    ```
+   
+   To train, evaluate and save the cross-modal network (CNN + bidirectional LSTM, inspired by [He +, 2017](https://arxiv.org/abs/1611.04496)), in terminal:
+
+   ```bash
+   $ python crossview.py
+   ```
+   To train, evaluate and save the deep residual network with gating mechanism (inspired by [Dauphin et al., 2016](https://arxiv.org/abs/1612.08083)), in terminal:
+
+   ```bash
+   $ python gresnet.py
+   ```
 
 ## Results
 
