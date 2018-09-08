@@ -187,7 +187,7 @@ class GatedResNet(nn.Module):
         layers.append(block(self.inplanes, planes, stride, activation, downsample))
         self.inplanes = planes * block.expansion
         for i in range(1, blocks):
-            layers.append(block(self.inplanes, planes))
+            layers.append(block(self.inplanes, planes, stride, activation))
 
         return nn.Sequential(*layers)
 
